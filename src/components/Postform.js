@@ -9,6 +9,7 @@ class PostForms extends Component {
         super(props); 
 
         this.state = {
+            //id: 1000,
             title: 'title goese here',
             body: 'body text goes here',
         };
@@ -27,11 +28,12 @@ class PostForms extends Component {
         event.preventDefault(); 
 
         const post = {
+            //id: this.state.id,
             title: this.state.title,
             body: this.state.body,
         };
         // CAll ACTION
-        this.props.createPosts();
+        this.props.createPosts(post);
     }
 
   render() {
@@ -55,6 +57,11 @@ class PostForms extends Component {
       </div>
     )
   }
+
 }
+
+PostForms.propTypes =  {
+    createPosts: PropTypes.func.isRequired     
+};
 
 export default connect(null, { createPosts })(PostForms);

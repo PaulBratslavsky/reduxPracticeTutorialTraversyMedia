@@ -9,6 +9,11 @@ class Posts  extends Component {
     console.log("from posts.js", this.props);
   }
  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.newPost) {
+      this.props.posts.unshift(nextProps.newPost)
+    }
+  }
 
   render() {
     const postItems = this.props.posts.map( post => {
@@ -29,13 +34,15 @@ class Posts  extends Component {
   }
 }
 
-Posts.PropTypes = {
+Posts.propTypes = {
   fetchPosts: PropTypes.func.isRequired,
   posts: PropTypes.array.isRequired,
+  newPost: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
     posts: state.posts.items,
+    newPost: state.posts.item,
 });
 
 export default connect(mapStateToProps, { fetchPosts })(Posts);
